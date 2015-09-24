@@ -16,20 +16,20 @@
         ng-controller = "AppCtrl"> <!--define controller -->
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Awesome App</h1><br>
+        <h1 class="title">Shitosh's Awesome App</h1><br>
       </ion-header-bar>
       
       
       <ion-content class="padding">
       <!--  <button class="button button-assertive">I'm a button</button> -->
 
-          {{myVariable}}
+          
 
           <ion-list>
             <ion-item class="item-divider">List of Objects</ion-item>
             <ion-item ng-repeat="item in stuffList track by $index">
-              {{$index}} - {{item.hero}} - {{item.type}}!
-              <p>Item = {{item | json}} $index= {{$index}}</p>  <!-- I didn't understand this line-->
+              {{$index}} - Name: {{item.name}}, Room: {{item.room}}!
+              
             </ion-item>
           </ion-list>
 
