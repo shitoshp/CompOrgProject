@@ -55,13 +55,13 @@ a.service('ParseHttpService', function ($http) {
                     });
             },
 
-            getStuff: function (_id) {
+            getStuff: function () {
 
                 // if an id is passed in then use it when querying
                 // stuff data
                 var settings = {
                     method: 'GET',
-                    url: baseURL + 'classes/stuff/' + _id,
+                    url: baseURL + 'classes/stuff/',
                     headers: authenticationHeaders,
                 };
 
@@ -72,10 +72,10 @@ a.service('ParseHttpService', function ($http) {
                         // In the response resp.data contains the result
                         // check the console to see all of the data returned
                         console.log('getStuff', response);
-                        return response.data;
+                        return response.data.results;
                     });
             }
-        };
+        }
 }); 
 
 
@@ -83,33 +83,11 @@ a.service('ParseHttpService', function ($http) {
 
 a.controller('AppCtrl', function ($scope, ParseHttpService) {
 
-	 $scope.currentUser = null;
-        $scope.apiResponseData = {};
-        $scope.uiData = {};
+	$scope.stuffList = {};
 
-        function _alertHandler(_error) {
-            alert("ERROR " + JSON.stringify(_error, null, 2));
-        }
-        /**
-         * logs the user into the application
-         */
-        $scope.doLogin = function () {
-            return ParseHttpService.login().then(function (_response) {
-                $scope.currentUser = _response;
-                $scope.apiResponseData = _response;
-            }, _alertHandler);
-        };
-
-        /**
-         * [[Description]]
-         * @returns {[[Type]]} [[Description]]
-         */
-
-        $scope.getStuffList = function () {
-            return ParseHttpService.getStuff("").then(function (_response) {
-                $scope.apiResponseData = _response;
-            }, _alertHandler);
-        }; 
+	ParseHttpService.getStuff().then(function (_data) {
+		$scope.stuffList = _data;
+	}); 
 
 });	
 
