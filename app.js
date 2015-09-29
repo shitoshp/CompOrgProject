@@ -85,11 +85,17 @@ a.controller('AppCtrl', function ($scope, ParseHttpService) {
 
 	$scope.stuffList = {};
 
-	ParseHttpService.getStuff().then(function (_data) {
-		$scope.stuffList = _data;
-	}); 
+    ParseHttpService.login().then(function(){
+
+    });
+
+    $scope.handleButtonClick = function() {
+        ParseHttpService.getStuff().then(function (_data) {
+            $scope.stuffList = _data;
+        }); 
+    }
+
+	
 
 });	
-
-
 
