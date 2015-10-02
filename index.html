@@ -12,41 +12,71 @@
     <!--end -->
 
 </head>
-<body ng-app="app"
-      ng-controller = "AppCtrl"> <!--define controller -->
-<ion-pane>
-    <ion-header-bar class="bar-stable">
-        <h1 class="title">Shitosh's Awesome App</h1><br>
-    </ion-header-bar>
+<body ng-app="app">
 
 
-    <ion-content class="padding">
+    <ion-nav-bar class='bar-positive'>
+        <ion-nav-back-button class="button-clear">
+            <i class="ion-arrow-left-c"></i> Back
+        </ion-nav-back-button>
+    </ion-nav-bar>
 
-        <!--  <button class="button button-assertive">I'm a button</button> -->
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
 
 
-
-        <ion-list>
-            <ion-item class="item-divider">List of Objects</ion-item>
-            <ion-item>
-                <!-- button goes here -->
-                <button class="button button-stable"
-                        ng-click="handleButtonClick()">
-                    View List
-                </button>
-            </ion-item>
-            <ion-item ng-repeat="item in stuffList track by $index">
-                {{$index}} - Name: {{item.name}}, Room: {{item.room}}
-
-            </ion-item>
-        </ion-list>
-
-    </ion-content>
+    <script type="text/ng-template" id="home.html">
+        <ion-view title="Home">
+            <ion-content class="padding">
+                <ion-item class="item-divider">Add item here</ion-item>
+                <item class="item-input">
+                    <label class="item-input-wrapper">
+                        <input type="text" placeholder="Name, Room" ng-model="inputItem.value">
+                    </label>
+                    <button class="button button-clear" ng-click="addItem()">ADD
+                    </button>
+                </item>
 
 
 
 
-</ion-pane>
+
+                <ion-list>
+                    <ion-item class="item-divider">List of Objects</ion-item>
+
+                    <ion-item ng-repeat="item in itemsList track by item.objectId">
+                        <ion-item ng-click="goToDetailState(item.objectId)">
+                        <div>{{$index}} - Name: {{item.name}}, Room: {{item.room}}</div>
+                        <div class="text-right">
+                            <button class="ion-minus-circled button"
+                                    ng-click="deleteObject(item.objectId)">
+                            </button>
+                            <button class="ion-edit button"
+                                    ng-click="editObject(item)">
+                            </button>
+                        </div>
+                        </ion-item>
+                    </ion-item>
+
+                </ion-list>
+                <pre class="padding">{{stateInfo | json}}</pre>
+            </ion-content>
+        </ion-view>
+    </script>
+
+    <script type="text/ng-template" id="detail.html">
+        <ion-view title="Detail">
+            <ion-content class="padding">
+                <h4>State Information</h4>
+                <pre class="padding">{{stateInfo | json}}</pre>
+                <br/>
+                <h4>State Parameter Information</h4>
+                <pre class="padding">{{stateParamsInfo | json}}</pre>
+
+            </ion-content>
+        </ion-view>
+    </script>
+
+
 </body>
 </html>
 
