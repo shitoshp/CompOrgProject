@@ -1,43 +1,59 @@
+/**
+ * Created by shitosh parajuli on 10/1/2015.
+ */
 (function () {
-    
+
     var a = angular.module('app', ['ionic', 'App.Services']);  //creating app by angular
-/*.controller("controller-one", function($scope){
-    
-	//Private since not attached to scope
-	var privateVar = "Can't see this";
+    /*.controller("controller-one", function($scope){
 
-	//Accesible to view since it is attached to scope
-    $scope.myVariable = "I can see you";
+     //Private since not attached to scope
+     var privateVar = "Can't see this";
 
-    $scope.items = ['lol',
-    			    '2nd item'];*/
+     //Accesible to view since it is attached to scope
+     $scope.myVariable = "I can see you";
+
+     $scope.items = ['lol',
+     '2nd item'];*/
 
 
 //new controller
 
 
-        
 
 
 
 
-        a.controller('AppCtrl', function ($scope, ParseHttpService) {
 
-	       $scope.stuffList = {};
+    a.controller('AppCtrl', function ($scope, ParseHttpService) {
 
-            ParseHttpService.login().then(function(){
+        $scope.stuffList = {};
 
-            });
+        function populateList() {
+            return ParseHttpService.getStuff()
+        }
 
-            $scope.handleButtonClick = function() {
-                ParseHttpService.getStuff().then(function (_data) {
-                    $scope.stuffList = _data;
-                }); 
-            }
+        console.log('Start')
 
-	
+        ParseHttpService.login().then(function loginSuccess(_loggedIn) {
+            alert(_loggedIn.username + " logged in");
 
-        });	
+                $scope.handleButtonClick = function() {
+                    populateList().then(function (_data) {
+                        $scope.stuffList = _data;
+                    });
+                }
+        },
+            function error(_error) {
+                alert("Error" + _error);
+        });
+
+
+
+
+
+
+
+    });
 
 })();
 
