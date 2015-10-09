@@ -175,16 +175,21 @@
     });
 
     a.controller('detailCtrl', function($scope, $state, ParseHttpService){
+        
+        $scope.itemDetails = '';
+
         $scope.stateInfo = $state.current;
 
-        $scope.stateParamsInfo = $state.params
+        $scope.stateParamsInfo = $state.params;
+
+        
 
         //$scope.stuffDetail = ParseHttpService.getStuffbyid($state.params._id)
 
-        ParseHttpService.getStuffbyid($state.params.objectId).then(function(_data){
-            console.log(_data);
-            console.log('i got something')
-            $scope.item = _data;
+        ParseHttpService.getStuffbyid($state.params.id).then(function abc(_iddata){
+            console.log(_iddata);
+            console.log('am i working??????????')
+            $scope.itemDetails = _iddata;
         }, function (_error) {
             alert("Error". _error.message);
         });
