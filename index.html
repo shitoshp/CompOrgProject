@@ -40,12 +40,12 @@
 
 
 
-                <ion-list>
+
                     <ion-item class="item-divider">List of Objects</ion-item>
 
-                    <ion-item ng-repeat="item in itemsList track by item.objectId">
-                        <ion-item ng-click="goToDetailState(item.objectId)">
-                        <div>{{$index}} - Name: {{item.name}}, Room: {{item.room}}</div>
+                     <ion-list ng-repeat="item in itemsList track by item.objectId">
+                        <ion-item class = "name" ng-click="goToDetailState(item.objectId)">
+                        {{$index}} - Name: {{item.name}}, Room: {{item.room}}</ion-item>
                         <div class="text-right">
                             <button class="ion-minus-circled button"
                                     ng-click="deleteObject(item.objectId)">
@@ -54,10 +54,10 @@
                                     ng-click="editObject(item)">
                             </button>
                         </div>
-                        </ion-item>
+                     </ion-list>
                     </ion-item>
 
-                </ion-list>
+
                 <pre class="padding">{{stateInfo | json}}</pre>
             </ion-content>
         </ion-view>
@@ -71,6 +71,10 @@
                 <br/>
                 <h4>State Parameter Information</h4>
                 <pre class="padding">{{stateParamsInfo | json}}</pre>
+                <h4>Details:</h4>
+                <pre class="padding">{{itemDetails | json}}</pre>
+                Name: {{itemDetails.name}}, Room: {{itemDetails.room}}
+
 
             </ion-content>
         </ion-view>
