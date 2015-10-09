@@ -27,6 +27,7 @@
                 var credentials = {
                     "username": "admin",
                     "password": "test"
+
                 };
 
                 var settings = {
@@ -54,7 +55,7 @@
                 var settings = {
                     method: 'GET',
                     url: baseURL + 'classes/stuff/',
-                    headers: authenticationHeaders,
+                    headers: authenticationHeaders
                 };
 
 
@@ -71,7 +72,7 @@
 
 
                 var settings = {
-                    method: 'GET',
+                    //method: 'GET',
                     url: baseURL + 'classes/stuff/',
                     headers: authenticationHeaders
                 };
@@ -81,8 +82,8 @@
                     .then(function (response) {
                         // In the response resp.data contains the result
                         // check the console to see all of the data returned
-                        console.log('getStuffbyid', response);
-                        return response.data.results;
+                        console.log('getstuffbyid', response);
+                        return response.data;
                     });
             },
 
